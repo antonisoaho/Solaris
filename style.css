@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Roboto+Condensed:wght@300&family=Secular+One&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    overflow:hidden;
+    background: linear-gradient(90deg, #0C164D 0%, #190B22 100%);
+}
+
+h1,
+h2,
+h3 {
+    text-transform:uppercase;
+    font-weight: 400;
+}
+
+h1 {
+    font-family: "Secular one", sans-serif;
+    font-size: 3.75rem;
+    line-height: 3.75rem;
+    letter-spacing: .09em;
+    color: white;
+}
+
+h2 {
+    font-family: "Lora", serif;
+    color: rgba(255, 208, 41, 1);
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    letter-spacing: .6em;;
+}
+
+h3 {
+    font-family: "Secular one", sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.125rem;
+    letter-spacing: .09em;
+}
+
+p {
+    font-family: Roboto Condensed;
+    font-weight: 300;
+    font-size: 1.125rem;
+    line-height: 1.9125rem;
+    font-style:normal;
+}
+
+.star {
+    background-color: rgba(255,255,255, .3);
+    width: .375rem;
+    height: .375rem;
+    position:absolute;
+    z-index: -1;
+    filter: blur(1px);
+}
+
+
+.infopage {
+    position:absolute;
+    height: 100vh;
+    width: 100vw;
+    display:none;
+    background: linear-gradient(90deg, #0C164D 0%, #190B22 100%);
+    gap: 10rem;
+    z-index: 1;
+    align-items:center;
+    justify-content:center;
+}
+
+.info {
+    height: 42.625rem;
+    width: 40rem;
+    display:grid;
+    grid-template-columns: repeat(2, auto-fit, 1fr);
+    grid-template-rows: repeat(4, max-content fit-content(8fr), 1fr);
+    color: white;
+    position:absolute;    
+    overflow: hidden;
+}
+
+.info > * {
+    padding: 1rem;
+}
+
+.info--close.btn {
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,1);
+    position:absolute;
+    right: 1rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.btn:hover {
+    font-size: 1.55rem;
+    transition: font-size .2s;
+}
+
+.info--planetname {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 1;
+    height: 4rem;
+    padding-top: 1rem;
+}
+
+.info--latinname {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 1;
+    margin-top: 4rem;
+    height: 2rem;
+}
+
+.info--data > p {
+    line-height: 1.9375rem;
+    letter-spacing: 0.16em;
+}
+
+.info--desc {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 2;
+    overflow-y: auto;
+    margin-top: .5rem;
+}
+
+.info-circ,
+.info-distance,
+.num-of-moons
+ {
+    border-top: 1px rgba(255, 255, 255, 0.3) solid;
+}
+
+.info-circ,
+.info-distance {
+    grid-row: 3;
+}
+
+.num-of-moons {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 5;
+}
+
+.logo-wrapper {
+    width: 625px;
+    height: 121px;
+    position: absolute;
+    top: 72px;
+    right: 68px;
+    display:flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items:flex-end;
+}
+
+.solarsystem {
+    width: 100vw;
+    margin-right: 5rem;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.solarsystem > * {
+    cursor: pointer;
+    transition: all .3s;
+    border-radius: 50%;
+}
+
+.solarsystem > *:hover {
+    box-shadow: rgba(255, 255, 255, .5) 0px 0px 25px 1px;
+}
+
+.solen,
+.blue-sun {
+    height: 48rem;
+    width: 48rem;
+    border-radius: 50%;
+}
+
+.solen {
+    background: rgba(255, 208, 41, 1);
+    box-shadow: 0px 0px 250px 0px rgba(255, 208, 41, 0.2);
+    margin-left: -39rem;
+}
+
+.blue-sun {
+    background: rgba(66, 142, 212, 1);
+    box-shadow: rgba(66, 142, 212, 0.1) 0px 0px 0px 40px,
+    rgba(66, 142, 212, 0.06) 0px 0px 0px 80px;
+    left: -39rem;
+    position:absolute;
+}
+
+.merkurius {
+    height: .875rem;
+    width: .875rem;
+    background: rgba(136, 136, 136, 1);
+}
+
+.venus {
+    height:1.625rem ;
+    width:1.625rem ;
+    background: rgba(231, 205, 205, 1);
+}
+
+.jorden {
+    height: 1.75rem;
+    width: 1.75rem;
+    background: rgba(66, 142, 212, 1);
+}
+
+.mars {
+    height: .875rem;
+    width: .875rem;
+    background: rgba(239, 95, 95, 1);
+}
+
+.jupiter {
+    height: 11.75rem;
+    width: 11.75rem;
+    background: rgba(226, 148, 104, 1);
+}
+
+.saturnus {
+    height: 9rem;
+    width: 9rem;
+    background: rgba(199, 170, 114, 1);
+}
+
+.saturnus::before {
+    content: "";
+    border-radius: 100%;
+    position:absolute;
+    height: 13.639rem;
+    width: .344rem;
+}
+
+.uranus {
+    height: 4.125rem;
+    width: 4.125rem;
+    background: rgba(201, 212, 241, 1);
+}
+
+.neptunus {
+    height: 4.125rem;
+    width: 4.125rem;
+    background: rgba(122, 145, 167, 1);
+}

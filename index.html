@@ -3,9 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Document</title>
   </head>
   <body>
+    <div class="logo-wrapper">
+      <h1>Solsystem</h1>
+      <h2>Solaris</h2>
+    </div>
+
+    <div class="wrapper infopage">
+      <figure class="blue-sun"></figure>
+      <figure class="stars"></figure>
+      <figcaption class="info">
+        <button class="info--close btn">&#10005;</button>
+        <h1 class="info--planetname name"></h1>
+        <h2 class="info--latinname latinName"></h2>
+        <p class="info--desc desc"></p>
+
+        <article class="info--data info-circ">
+          <h3>Omkrets</h3>
+          <p class="circumference"></p>
+        </article>
+
+        <article class="info--data info-distance">
+          <h3>KM från solen</h3>
+          <p class="distance"></p>
+        </article>
+
+        <article class="info--data temperature-min">
+          <h3>Min temperatur</h3>
+          <p class="temp-night"></p>
+        </article>
+
+        <article class="info--data temperature-max">
+          <h3>Max temperatur</h3>
+          <p class="temp-day"></p>
+        </article>
+
+        <article class="info--data num-of-moons">
+          <h3>Månar</h3>
+          <p class="moons"></p>
+        </article>
+      </figcaption>
+    </div>
+
+    <main class="solarsystem"></main>
     <script defer src="./main.js"></script>
   </body>
 </html>
