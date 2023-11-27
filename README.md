@@ -1,0 +1,2 @@
+# Solaris
+Vanilla JavaScript exam
