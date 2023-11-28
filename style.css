@@ -55,13 +55,28 @@ p {
 }
 
 .star {
-    background-color: rgba(255,255,255, .3);
+    background-color: rgb(255,255,255);
     width: .375rem;
-    height: .375rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
     position:absolute;
     z-index: -1;
     filter: blur(1px);
+    opacity: .3;
+    animation:blink 1.5s infinite alternate;
 }
+
+ @keyframes blink {
+    from {
+        opacity: .9;
+        box-shadow: rgba(255, 255, 255, .5) 0px 0px 5px 1px;
+    }
+
+    to {
+        opactiy: .3;
+        box-shadow: rgba(255, 255, 255, .5) 0px 0px 0px 0px;
+    }
+ }
 
 
 .infopage {
@@ -175,7 +190,7 @@ p {
 
 .solarsystem > * {
     cursor: pointer;
-    transition: all .3s;
+    transition: all .2s;
     border-radius: 50%;
 }
 
@@ -192,7 +207,7 @@ p {
 
 .solen {
     background: rgba(255, 208, 41, 1);
-    box-shadow: 0px 0px 250px 0px rgba(255, 208, 41, 0.2);
+    box-shadow: 0px 0px 150px 0px rgba(255, 208, 41, 0.2);
     margin-left: -39rem;
 }
 
@@ -238,6 +253,9 @@ p {
     height: 9rem;
     width: 9rem;
     background: rgba(199, 170, 114, 1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .saturnus::before {
@@ -246,6 +264,8 @@ p {
     position:absolute;
     height: 13.639rem;
     width: .344rem;
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(60deg)
 }
 
 .uranus {
