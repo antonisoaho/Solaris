@@ -24,7 +24,7 @@ const getApiKey = async () => {
   }
 };
 
-//Funktion för att hämta ut data om planeterna samt spara i en variabel
+// Här hämtas datan ut från vår api samt anropar 2 funktioner för att gå vidare med datan
 const getPlanetData = async (url, key) => {
   try {
     const response = await fetch(url, {
@@ -35,14 +35,35 @@ const getPlanetData = async (url, key) => {
     if (!response) {
       throw new Error('Error fetching planets');
     }
-
     data = await response.json();
-    planetData = data.bodies;
+
+    //Uppskapning av objekt & uppskapning av planeterna på DOM
+    planetData = await planetObjectCreator(data);
     createPlanets(planetData);
-    return data.bodies;
+
+    return planetData;
   } catch (error) {
     console.log('Error:', error);
   }
+};
+
+// Funktion för att skapa upp ett objekt med endast den nödvändiga infon om alla planeter
+const planetObjectCreator = (data) => {
+  return data.bodies.map((planet) => ({
+    name: planet.name,
+    latinName: planet.latinName,
+    desc: planet.desc,
+    night: `${planet.temp.night} °C`,
+    day: `${planet.temp.day} °C`,
+    circumference: `${planet['circumference'].toLocaleString()} km`,
+    distance: `${planet['distance'].toLocaleString()} km`,
+    moons:
+      planet.moons.length > 0
+        ? Array.isArray(planet.moons)
+          ? planet.moons.join(', ')
+          : planet.moons
+        : `${planet.name} har inga månar.`,
+  }));
 };
 
 // Funktion för  att skapa upp planeterna
@@ -62,33 +83,11 @@ const createPlanets = (planetData) => {
 
 // Funktion för att se information om vald planet
 const showInfo = (planet) => {
+  // Loop för att printa ut all info - se om jag kunde
   for (let key in planet) {
     if (planet.hasOwnProperty(key)) {
-      const element = document.querySelector(`.${key}`);
-
-      if (key === 'temp') {
-        //Kontrollerar om nyckeln är temp och går därför djupare i objektet för att få ut rätt typ
-        for (let type in planet[key]) {
-          const tempElement = document.querySelector(`.temp-${type}`);
-          if (tempElement !== null) {
-            tempElement.textContent = `${planet[key][type]} °C`;
-          }
-        }
-      } else if (key === 'moons' && Array.isArray(planet[key])) {
-        //Kollar om det är flera månar och printar därför ut lite snyggare
-        const moonString = planet[key].join(', ');
-        element.textContent = moonString;
-      } else if (element !== null) {
-        // Kontrollerar om det går att använda toLocaleString() innan det används
-        const formattedValue =
-          typeof planet[key] === 'number'
-            ? planet[key].toLocaleString()
-            : planet[key];
-        // Lägger in den formatterade strängen och kikar om det behöver läggas in ' km' i slutet
-        element.textContent =
-          formattedValue +
-          (key === 'distance' || key === 'circumference' ? ' km' : '');
-      }
+      const infoElement = document.querySelector(`.${key}`);
+      infoElement.textContent = planet[key];
     }
   }
 
@@ -113,7 +112,7 @@ const createStars = () => {
 
     //Här randomizas storlek på stjärnorna mellan .1 - .5 rem samt hur lång animationDelay ska vara.
     star.style.width = `${Math.random() * (0.5 - 0.1) + 0.1}rem`;
-    star.style.animationDelay = `${(Math.random() * 14 + 1).toFixed(2)}s`;
+    star.style.animationDelay = `${(Math.random() * 9 + 1).toFixed(2)}s`;
 
     starBackground.append(star);
   }
