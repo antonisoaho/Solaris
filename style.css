@@ -14,6 +14,7 @@ body {
     align-items:center;
     overflow:hidden;
     background: linear-gradient(90deg, #0C164D 0%, #190B22 100%);
+    user-select: none;
 }
 
 h1,
