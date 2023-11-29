@@ -87,7 +87,7 @@ const getUniqueMoons = (planetName, moons) => {
   }
 };
 
-// Funktion för  att skapa upp planeterna
+// Funktion för att skapa upp planeterna
 const createPlanets = (planetData) => {
   //forEach loop för att lägga in classList så att stylingen hoppar in
   planetData.forEach((planet) => {
@@ -95,7 +95,7 @@ const createPlanets = (planetData) => {
     planetElement.classList.add(planet.name.toLowerCase());
     solarSystem.append(planetElement);
 
-    //eventListener på varje element för att kunna se mer info
+    //eventListener på varje planet för att kunna se mer info
     planetElement.addEventListener('click', () => {
       showInfo(planet);
     });
@@ -120,6 +120,7 @@ const showInfo = (planet) => {
   closeButton.addEventListener('click', hideInfo);
 };
 
+// infoplanet stylingfunktion
 const infoPlanetStyler = (planetName) => {
   const planetColor = planetStyle[planetName].color;
   const infoPlanetRing = document.querySelector('.info-planet--ring');
