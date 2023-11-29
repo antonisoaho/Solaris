@@ -85,7 +85,6 @@ p {
     width: 100vw;
     display:none;
     background: linear-gradient(90deg, #0C164D 0%, #190B22 100%);
-    gap: 10rem;
     z-index: 1;
     align-items:center;
     justify-content:center;
@@ -190,34 +189,16 @@ p {
 
 .solarsystem > * {
     cursor: pointer;
-    transition: all .2s;
+    transition: all .3s;
     border-radius: 50%;
+    box-shadow: inset -5px 0px 7px 3px rgba(0, 0, 0, 0.2)
 }
 
 .solarsystem > *:hover {
     box-shadow: rgba(255, 255, 255, .5) 0px 0px 25px 1px;
 }
 
-.solen,
-.blue-sun {
-    height: 48rem;
-    width: 48rem;
-    border-radius: 50%;
-}
 
-.solen {
-    background: rgba(255, 208, 41, 1);
-    box-shadow: 0px 0px 150px 0px rgba(255, 208, 41, 0.2);
-    margin-left: -39rem;
-}
-
-.blue-sun {
-    background: rgba(66, 142, 212, 1);
-    box-shadow: rgba(66, 142, 212, 0.1) 0px 0px 0px 40px,
-    rgba(66, 142, 212, 0.06) 0px 0px 0px 80px;
-    left: -39rem;
-    position:absolute;
-}
 
 .merkurius {
     height: .875rem;
@@ -264,8 +245,18 @@ p {
     position:absolute;
     height: 13.639rem;
     width: .344rem;
+    display:inline-block;
     background: rgba(255, 255, 255, 0.4);
-    transform: rotate(60deg)
+    animation: wobble 2s alternate infinite;
+}
+
+@keyframes wobble {
+    from {
+        transform: rotate(67.5deg);
+    }
+    to {
+        transform: rotate(62.5deg);
+    }
 }
 
 .uranus {
@@ -278,4 +269,49 @@ p {
     height: 4.125rem;
     width: 4.125rem;
     background: rgba(122, 145, 167, 1);
+}
+
+.solen,
+.info-planet {
+    height: 48rem;
+    width: 48rem;
+    border-radius: 50%;
+}
+
+.solen {
+    background: rgba(255, 208, 41, 1);
+    box-shadow: 0px 0px 150px 0px rgba(255, 208, 41, 0.2);
+    margin-left: -39rem;
+}
+
+.info-planet {
+    box-shadow: rgba(66, 142, 212, 0.1) 0px 0px 0px 40px,
+    rgba(66, 142, 212, 0.06) 0px 0px 0px 80px;
+    left: -39rem;
+    position:absolute;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.info-planet--ring {
+    border-radius: 100%;
+    position:absolute;
+    height: 2rem;
+    width: 70rem;
+    margin-top: 7rem;
+    display: block;
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(-15deg);
+    transform-origin:center;
+    animation: rotate-around 5s alternate infinite;
+}
+
+@keyframes rotate-around {
+    from {
+        transform: rotate(-15deg);
+    }
+    to {
+        transform: rotate(-20deg);
+    }
 }
