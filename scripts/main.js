@@ -1,15 +1,15 @@
-// Deklarerande av DOM-element
+// Deklarerande av DOM-element som kommer att användas senare i koden.
 const solarSystem = document.querySelector('.solarsystem');
 const closeButton = document.querySelector('.info--close');
 const infoPage = document.querySelector('.infopage');
 const starBackground = document.querySelector('.stars');
 const infoPlanet = document.querySelector('.info-planet');
 
-//Variabel för att säkra mainUrlen samt deklarera att vi har en variabel med alla planeter
+//Deklarerar huvud-URL:en för API-anrop och en variabel som kommer att hålla data om alla planeter.
 const mainUrl = 'https://n5n3eiyjb0.execute-api.eu-north-1.amazonaws.com';
 let planetData;
 
-// Objekt för att ha koll på färger samt om det ska vara ring runt planet eller inte
+// Objekt som lagrar varje planets färg och om den har en ring eller inte.
 const planetStyle = {
   solen: { color: '255, 208, 41', ring: false },
   merkurius: { color: '136, 136, 136', ring: false },
@@ -22,7 +22,7 @@ const planetStyle = {
   neptunus: { color: '122, 145, 167', ring: false },
 };
 
-//Funktion för att hämta ut en apiKey vid start av sidan varje gång.
+//Asynkron funktion för att hämta en API-nyckel varje gång sidan laddas.
 const getApiKey = async () => {
   try {
     const response = await fetch(`${mainUrl}/keys`, { method: 'POST' });
@@ -51,7 +51,7 @@ const getPlanetData = async (url, key) => {
     }
     data = await response.json();
 
-    //Uppskapning av objekt & uppskapning av planeterna på DOM
+    // Skapar ett objekt med nödvändig information om varje planet och skapar sedan en DOM-element för varje planet
     planetData = await planetObjectCreator(data);
     createPlanets(planetData);
 
@@ -146,6 +146,8 @@ const createStars = () => {
     const star = document.createElement('figure');
     //För att få med stylingen samt animationen så läggs klassnamn till
     star.className = 'star';
+
+    // Här slumpas positionerna för varje separat stjärna
     star.style.top = `${Math.random() * 100}%`;
     star.style.left = `${Math.random() * 100}%`;
 
@@ -157,8 +159,9 @@ const createStars = () => {
   }
 };
 
-// IIFE/IAFE (Immediately invoked async function expression) funktion för att köra asynkrona funktioner direkt när hemsidan laddas
-// Denna används även för att inte kunna hitta api-keyn i consolen när sidan är up and running
+// En IIFE (Immediately Invoked Function Expression) som körs direkt när sidan laddas.
+// Denna funktion är asynkron för att tillåta användning av 'await' för att hantera de asynkrona funktionsanropen i ordning.
+// Användning av IIFE hjälper till att skydda API-nyckeln från att hittas i konsolen.
 (async () => {
   try {
     const apiKey = await getApiKey();
