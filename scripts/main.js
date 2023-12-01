@@ -9,19 +9,6 @@ const infoPlanet = document.querySelector('.info-planet');
 const mainUrl = 'https://n5n3eiyjb0.execute-api.eu-north-1.amazonaws.com';
 let planetData;
 
-// Objekt som lagrar varje planets färg och om den har en ring eller inte.
-const planetStyle = {
-  solen: { color: '255, 208, 41', ring: false },
-  merkurius: { color: '136, 136, 136', ring: false },
-  venus: { color: '231, 205, 205', ring: false },
-  jorden: { color: '66, 142, 212', ring: false },
-  mars: { color: '239, 95, 95', ring: false },
-  jupiter: { color: '226, 148, 104', ring: false },
-  saturnus: { color: '199, 170, 114', ring: true },
-  uranus: { color: '201, 212, 241', ring: false },
-  neptunus: { color: '122, 145, 167', ring: false },
-};
-
 //Asynkron funktion för att hämta en API-nyckel varje gång sidan laddas.
 const getApiKey = async () => {
   try {
@@ -109,12 +96,10 @@ const showInfo = (planet) => {
     if (planet.hasOwnProperty(key)) {
       const infoElement = document.querySelector(`.${key}`);
       infoElement.textContent = planet[key];
-
-      // Anropa infoPlanetStyler här med planetens namn
-      infoPlanetStyler(planet.name.toLowerCase());
     }
   }
-
+  // Anropa infoPlanetStyler här med planetens namn
+  infoPlanetStyler(planet.name.toLowerCase());
   // För att visa infoboxen samt sätta en eventlistener på X-knappen så att man kan stänga ner
   infoPage.style.display = 'flex';
   closeButton.addEventListener('click', hideInfo);
@@ -122,17 +107,27 @@ const showInfo = (planet) => {
 
 // infoplanet stylingfunktion
 const infoPlanetStyler = (planetName) => {
-  const planetColor = planetStyle[planetName].color;
+  const planetElement = document.querySelector(`.${planetName}`);
+
+  const computedPlanet = window.getComputedStyle(planetElement);
+  const hasBefore =
+    window
+      .getComputedStyle(planetElement, ':before')
+      .getPropertyValue('content') !== 'none';
+
+  const backgroundColor = computedPlanet.backgroundColor;
+
+  // Extrahera RGB-värden från bakgrundsfärgen
+  const rgbValues = backgroundColor.match(/\d+/g);
+  const rgbString = rgbValues.join(', ');
+
+  // Kontrollerar om elementet har :before för att visa ring runt planet
   const infoPlanetRing = document.querySelector('.info-planet--ring');
+  infoPlanetRing.style.display = hasBefore ? 'block' : 'none';
 
   // Här sätts färgen
-  infoPlanet.style.backgroundColor = `rgb(${planetColor})`;
-  infoPlanet.style.boxShadow = `0px 0px 0px 40px rgba(${planetColor}, 0.1), 0px 0px 0px 80px rgba(${planetColor}, 0.06)`;
-
-  // Kontrollerar värdet på ring-key i objektet för att visa ring runt planet
-  infoPlanetRing.style.display = planetStyle[planetName].ring
-    ? 'block'
-    : 'none';
+  infoPlanet.style.backgroundColor = backgroundColor;
+  infoPlanet.style.boxShadow = `0px 0px 0px 40px rgba(${rgbString}, 0.1), 0px 0px 0px 80px rgba(${rgbString}, 0.06)`;
 };
 
 // Snabb funktion för att toggla bort planetinfon
