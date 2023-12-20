@@ -2,7 +2,7 @@
     "compilerOptions": {
         "module": "ES2022",
         "target": "es6",
-        "outDir": "./dist/scripts",
+        "outDir": "./docs/scripts",
         "removeComments": true,
         "rootDir": "./src"
     },
